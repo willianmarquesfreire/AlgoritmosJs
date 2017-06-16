@@ -35,8 +35,3 @@ class Pilha {
         return (this.items[size]) ? this.sizeStartIn(size+1) : size
     }
 }
-
-
-var p = new Pilha();
-
-console.log(p.sizeRecursive())
