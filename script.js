@@ -254,7 +254,8 @@ let myVertices = [
     'iguaracu',
     'primeiro de maio',
     'mandaguacu',
-    'sao sebastiao'
+    'sao sebastiao',
+    'castelo branco'
 ];
 
 for (let i in myVertices) {
@@ -276,10 +277,12 @@ graph.addEdge('londrina', 'sertanopolis');
 graph.addEdge('mandaguari', 'maringa');
 graph.addEdge('maringa', 'mandaguacu');
 graph.addEdge('maringa', 'marialva');
-graph.addEdge('maringa', 'nova esperanca');
 graph.addEdge('paranavai', 'nova esperanca');
 graph.addEdge('rolandia', 'apucarana');
 graph.addEdge('santa fe', 'iguaracu');
+graph.addEdge('maringa', 'mandaguacu');
+graph.addEdge('castelo branco', 'nova esperanca');
+graph.addEdge('mandaguacu', 'castelo branco');
 graph.addEdge('sertanopolis', 'primeiro de maio');
 
 
@@ -288,6 +291,6 @@ function printNode(value) {
     console.log("Visited Vertex: " + value)
 }
 
-console.log(graph.bfs('paranavai'))
+console.log(graph.bfs('apucarana'))
 
-console.log(graph.traceRoute('apucarana', 'paranavai'))
+console.log(graph.traceRoute('maringa', 'paranavai'))
