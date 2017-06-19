@@ -211,7 +211,7 @@ function Graph() {
         }
     }
 
-    this.goto = (a, b) => {
+    this.traceRoute = (a, b) => {
         a = a.replaceAll(' ', '');
         b = b.replaceAll(' ', '');
         let search = this.bfs(a);
@@ -290,4 +290,4 @@ function printNode(value) {
 
 console.log(graph.bfs('paranavai'))
 
-console.log(graph.goto('apucarana', 'paranavai'))
+console.log(graph.traceRoute('apucarana', 'paranavai'))
