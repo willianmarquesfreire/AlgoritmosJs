@@ -1,3 +1,8 @@
+String.prototype.replaceAll = function (search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+
 class Pilha {
     constructor() {
         this.items = []
@@ -114,11 +119,14 @@ function Graph() {
     let adjList = new Dictionary();
 
     this.AddVertex = v => {
+        v = v.replaceAll(' ', '');
         vertices.push(v);
         adjList.set(v, []);
     }
 
     this.addEdge = (v, w) => {
+        v = v.replaceAll(' ', '');
+        w = w.replaceAll(' ', '');
         adjList.get(v).push(w);
         adjList.get(w).push(v);
     }
@@ -202,31 +210,84 @@ function Graph() {
             predecessors: pred
         }
     }
+
+    this.goto = (a, b) => {
+        a = a.replaceAll(' ', '');
+        b = b.replaceAll(' ', '');
+        let search = this.bfs(a);
+        let predecessors = search.predecessors;
+
+        let route = [];
+        let atual = b;
+        
+        while (atual != a) {
+            route.unshift(predecessors[atual][0]);
+            atual = predecessors[atual][0];
+        }
+
+        route.push(b);
+        return route;
+    }
 }
 
 
 let graph = new Graph();
 
-let myVertices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
+let myVertices = [
+    'apucarana',
+    'astorga',
+    'arapongas',
+    'bela vista do paraiso',
+    'mandaguari',
+    'maringa',
+    'assai',
+    'londrina',
+    'jataisinho',
+    'rolandia',
+    'sao sebatiao',
+    'sertanopolis',
+    'marialva',
+    'nova esperanca',
+    'paranavai',
+    'porecatu',
+    'santa fe',
+    'iguaracu',
+    'primeiro de maio',
+    'mandaguacu',
+    'sao sebastiao'
+];
 
 for (let i in myVertices) {
     graph.AddVertex(myVertices[i])
 }
 
 
-graph.addEdge('a', 'b');
-graph.addEdge('a', 'c');
-graph.addEdge('a', 'd');
-graph.addEdge('c', 'd');
-graph.addEdge('c', 'g');
-graph.addEdge('d', 'g');
-graph.addEdge('d', 'h');
-graph.addEdge('b', 'e');
-graph.addEdge('b', 'f');
-graph.addEdge('e', 'i');
+graph.addEdge('apucarana', 'mandaguari');
+graph.addEdge('apucarana', 'arapongas');
+graph.addEdge('arapongas', 'astorga');
+graph.addEdge('astorga', 'maringa');
+graph.addEdge('bela vista do paraiso', 'porecatu');
+graph.addEdge('londrina', 'assai');
+graph.addEdge('londrina', 'bela vista do paraiso');
+graph.addEdge('londrina', 'jataisinho');
+graph.addEdge('londrina', 'rolandia');
+graph.addEdge('londrina', 'sao sebastiao');
+graph.addEdge('londrina', 'sertanopolis');
+graph.addEdge('mandaguari', 'maringa');
+graph.addEdge('maringa', 'mandaguacu');
+graph.addEdge('maringa', 'marialva');
+graph.addEdge('maringa', 'nova esperanca');
+graph.addEdge('paranavai', 'nova esperanca');
+graph.addEdge('rolandia', 'apucarana');
+graph.addEdge('santa fe', 'iguaracu');
+graph.addEdge('sertanopolis', 'primeiro de maio');
+
+
 
 function printNode(value) {
     console.log("Visited Vertex: " + value)
 }
 
-console.log(graph.bfs('e'))
+console.log(graph.bfs('paranavai'))
+
+console.log(graph.goto('apucarana', 'paranavai'))
